@@ -11,8 +11,8 @@ VERSÃO EM PORTUGUÊS DO BOT
 Como configurar:
 + descompacte o arquivo node_modules.zip
 + instalar nodejs
-+ aceite intenções em https://discord.com/developers/applications/
-+ alterar token e roomID em alayar.json, ID de usuário em bot.py
++ aceite idents em https://discord.com/developers/applications/
++ alterar token e roomID em configurações.json, ID de usuário em bot.py
 + execute o arquivo setup.py (pip install se você perder alguns módulos)
 + execute o arquivo bot.py
 + 
