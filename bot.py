@@ -13,21 +13,23 @@ from discord.ext import commands
 from re import search
 import threading
 import psutil
-token = "MTA0MDk5MjE4NjE5MzQyNDQ3NQ.Gf--wg.fJcwD3xBEyXssnph1IzxJlZU0SCxmJdD3LutgU"
-buyers = [743135879802912879]
-admins = [743135879802912879]
-ownerList = [743135879802912879]
 
-prefix = "+"
+
+token = "MTIwMjAyOTE3NzM5NDY5MjEwNg.GqhHck.lkdrzbdJ_krXzEH37kr1UddCFSDURMc6yBzUJM"
+buyers = [235473937864065024]
+admins = [235473937864065024]
+ownerList = [235473937864065024]
+
+prefix = "a!"
 intents = discord.Intents.all()
 intents.messages = True
 bot = commands.Bot(command_prefix=prefix,help_command=None, intents=intents)
 threading = ThreadPoolExecutor(max_workers=int(100000000))
 @bot.event
 async def on_connect():
-    print(f"Connecting Bot : {bot.user}")
+    print(f"Conectado a : {bot.user}")
     time.sleep(1.0)
-    print("Success, Bot Is Online !!!! Owner:katavnnn#8496")
+    print("Successo, Bot Online !!!! Owner: Epysp")
 	
 
 
@@ -38,80 +40,80 @@ async def on_connect():
 @bot.command()
 async def add_buyer(ctx, buyer : int = None):
     if ctx.author.id not in admins:
-        embed = discord.Embed(title="Admin-only Command", description="Only Admin Can Use Commands !!!", color=0xa30000)
+        embed = discord.Embed(title="Comandos Admin", description="Apenas Administradores podem usar esses comandos!", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif buyer in buyers:
-        embed = discord.Embed(title="Buyer Error", description=f"{buyer} Is already a buyer!", color=0xa30000)
+        embed = discord.Embed(title="Comprador - Erro", description=f"{buyer} Já é um comprador", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif buyer is None:
-        embed = discord.Embed(title="Buyer Error", description="Please provide a buyer.", color=0xa30000)
+        embed = discord.Embed(title="Comprador  Error de Compra", description="Forneça quem irá comprar.", color=0xa30000)
         await ctx.send(embed=embed)
 
     else:
         buyers.append(buyer)
-        embed = discord.Embed(title="Buyer Added", description=f"{buyer} has been added to the Buyer list...", color=0xa30000)
+        embed = discord.Embed(title="Usuário Adicionado", description=f"{buyer} Foi adicionado a lista de usuários...", color=0xa30000)
         await ctx.send(embed=embed)
 
 #delete a buyer from the buyers list
 @bot.command()
 async def del_buyer(ctx, buyer : int = None):
     if ctx.author.id not in admins:
-        embed = discord.Embed(title="Admin-only Command", description="Only Admin Can Use Commands !!!", color=0xa30000)
+        embed = discord.Embed(title="Comandos Admin", description="Apenas Administradores podem usar esses comandos!", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif buyer not in buyers:
-        embed = discord.Embed(title="Buyer Error", description=f"{buyer} is not a buyer!", color=0xa30000)
+        embed = discord.Embed(title="Erro", description=f"{buyer} Não é um comprador", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif buyer is None:
-        embed = discord.Embed(title="Buyer Error", description="Please provide a buyer.", color=0xa30000)
+        embed = discord.Embed(title="Error2", description="Informe um comprador", color=0xa30000)
         await ctx.send(embed=embed)
 
     else:
         buyers.remove(buyer)
-        embed = discord.Embed(title="Buyer Removed", description=f"{buyer} has been removed from the Buyer list...", color=0xa30000)
+        embed = discord.Embed(title="Usuário removido!", description=f"{buyer} Foi removido da lista de usuários", color=0xa30000)
         await ctx.send(embed=embed)
 
 #add an admin to the admins list
 @bot.command()
 async def add_admin(ctx, admin : int = None):
     if ctx.author.id not in ownerList:
-        embed = discord.Embed(title="Owner-only Command", description="Only Admin Can Use Commands !!!", color=0xa30000)
+        embed = discord.Embed(title="Comandos Owner", description="Apenas Owner poderá usar esses comandos!", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif admin in admins:
-        embed = discord.Embed(title="Administrator Error", description=f"{admin} is already an Admin!", color=0xa30000)
+        embed = discord.Embed(title="Administrador Error", description=f"{admin} Já pertence a lista de administradores", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif admin is None:
-        embed = discord.Embed(title="Administrator Error", description=f"Please provide an Admins ID", color=0xa30000)
+        embed = discord.Embed(title="Administrador Error", description=f"Informe o ID do Usuário", color=0xa30000)
         await ctx.send(embed=embed)
 
     else:
         admins.append(admin)
-        embed = discord.Embed(title="Administrator Added", description=f"{admin} has been added to the Admin list...", color=0xa30000)
+        embed = discord.Embed(title="Administrador Adicionado", description=f"{admin} Obteve as permissões de ADM.", color=0xa30000)
         await ctx.send(embed=embed)
 
 #delete an admin from the admins list
 @bot.command()
 async def del_admin(ctx, admin : int = None):
     if ctx.author.id not in ownerList:
-        embed = discord.Embed(title="Owner-only Command", description="Only Owner Can Use Commands !!!", color=0xa30000)
+        embed = discord.Embed(title="Comandos Owner", description="Apenas Owner poderá usar esses comandos!", color=0xa30000)
         await ctx.send(embed=embed)
 
     elif admin not in admins:
-	    embed = discord.Embed(title="Invalid ID", description="This ID doesn't belong to an existing Admin!", color=0xa30000)
+	    embed = discord.Embed(title="ERRO ID", description="Este ID não pertence a nenhum ADMIN", color=0xa30000)
 	    await ctx.send(embed=embed)
 
     elif admin is None:
-	    embed = discord.Embed(title="Invalid ID", description="Please provide an ID of a *current* Admin!", color=0xa30000)
+	    embed = discord.Embed(title="ERRO ID²", description="Forneça o ID de um administrador *atual*!", color=0xa30000)
 	    await ctx.send(embed=embed)
 
     else:
         admins.remove(admin)
-        embed = discord.Embed(title="Administrator Removed", description=f"{admin} has been removed...", color=0xa30000)
+        embed = discord.Embed(title="Administrador Removido", description=f"{admin} Perdeu as permissões de ADMIN", color=0xa30000)
         await ctx.send(embed=embed)
         
         
@@ -123,21 +125,21 @@ async def del_admin(ctx, admin : int = None):
 @bot.command()
 async def help(ctx):
 	if ctx.author.id not in buyers:
-		embeds = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embeds.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embeds.set_footer(text=f"© Onwer : VIEET#1686 | {ctx.author.name}")
+		embeds = discord.Embed(title="🚀 **MAI DDOS** 🚀", color=0xfcb103)
+		embeds.add_field(name="**Aviso**",value="Você não pode usar esse comando! :sotroll:")
+		embeds.set_footer(text=f"© Onwer :<@235473937864065024> | {ctx.author.name}")
 		
 		
 		await ctx.reply(embed=embeds)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", description="✨ **HELP MENU ✨", color=discord.Colour.random())
-		embed.set_author(name="KATA DDoS Bot V1", icon_url="https://media2.giphy.com/media/F2U5dFf4LG1zYmnJS2/giphy.gif")
-		embed.add_field(name="**Userinfo**", value="`View User Information`")
-		embed.add_field(name="**Botinfo**", value="`View Bot Information`")
-		embed.add_field(name="**Ping**", value="`Ping Website Status`")
-		embed.add_field(name="**Methods**", value="`Show All Methods DDoS`")
-		embed.add_field(name="**Commands**",value="`Show All Commands To DDoS`")
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}")
+		embed = discord.Embed(title="🚀 **MAI DDOS** 🚀", description="✨ **MENU✨", color=discord.Colour.random())
+		embed.set_author(name="MAI DDoS Bot V1", icon_url="https://i.pinimg.com/originals/9d/34/05/9d3405e21d700b1e62fd9a5d7831e382.gif")
+		embed.add_field(name="**Informaões do Usuário**", value="`Ver informações do Usuário`")
+		embed.add_field(name="**Botinfo**", value="`Ver informações do bot`")
+		embed.add_field(name="**Ping**", value="`Ping Status do site`")
+		embed.add_field(name="**Methods**", value="`Mostrar todos os métodos DDoS`")
+		embed.add_field(name="**Commands**",value="`Mostrar todos os comandos para DDoS`")
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}")
 		
 		await ctx.send(embed=embed)
 	
@@ -149,14 +151,14 @@ async def help(ctx):
 @bot.command()
 async def Userinfo(ctx, user:discord.Member=None):
 	embed = discord.Embed(color=user.color)
-	embed.set_author(name=f"User Info - {user}")
+	embed.set_author(name=f"Informações - {user}")
 	embed.set_thumbnail(url=user.avatar.url)
 	embed.add_field(name="ID :", value=user.id)
-	embed.add_field(name="Name :", value=user.display_name)
-	embed.add_field(name="Created at :", value=user.created_at)
-	embed.add_field(name="Joined at :", value=user.joined_at)
+	embed.add_field(name="Nome :", value=user.display_name)
+	embed.add_field(name="Criada :", value=user.created_at)
+	embed.add_field(name="Entrou :", value=user.joined_at)
 	embed.add_field(name="Bot ?", value=user.bot)
-	embed.set_footer(text=f"© Owner : katavnnn#8946 | Info User : {user}", icon_url=ctx.author.avatar)
+	embed.set_footer(text=f"© Owner : epysp | Usuário : {user}", icon_url=ctx.author.avatar)
 	
 	await ctx.send(embed=embed)
 	
@@ -164,12 +166,12 @@ async def Userinfo(ctx, user:discord.Member=None):
 @bot.command()
 async def vpsinfo(ctx):
 	embed = discord.Embed(color=0x03ff28)
-	embed.set_thumbnail(url="https://i.pinimg.com/originals/8f/f2/10/8ff210a59c7a8eadc434ec303f7a86f5.jpg")
-	embed.set_author(name="Vps Info - KATA DDOS")
+	embed.set_thumbnail(url="https://i.pinimg.com/564x/34/22/e6/3422e6cf2bbcd9f0fb8a35ea7037fdd7.jpg")
+	embed.set_author(name="Vps Info - MAI DDoS")
 	embed.add_field(name="Total RAM GB", value=round(psutil.virtual_memory()[0]/2**30, 2))
-	embed.add_field(name="RAM Usage %:", value=psutil.virtual_memory()[2])
-	embed.add_field(name="CPU Usage %:", value=psutil.cpu_percent(1))
-	embed.set_footer(text="© Owner : katavnnn#8946 | Info Bot : 🚀 KATA DDOS 🚀", icon_url=ctx.author.avatar)
+	embed.add_field(name="RAM %:", value=psutil.virtual_memory()[2])
+	embed.add_field(name="CPU %:", value=psutil.cpu_percent(1))
+	embed.set_footer(text=f"© Owner : epysp | Info Bot : 🚀 {bot.user} 🚀", icon_url=ctx.author.avatar)
 	
 	await ctx.send(embed=embed)	
 	
@@ -177,14 +179,14 @@ async def vpsinfo(ctx):
 @bot.command()
 async def Botinfo(ctx):
 	embed = discord.Embed(color=0x03ff28)
-	embed.set_thumbnail(url="https://i.pinimg.com/originals/8f/f2/10/8ff210a59c7a8eadc434ec303f7a86f5.jpg")
-	embed.set_author(name="Bot Info - KATA DDOS")
+	embed.set_thumbnail(url="https://i.pinimg.com/564x/c8/f6/7a/c8f67a2f49ebc5f6d7293e7649bc5ebd.jpg")
+	embed.set_author(name=f"Info - {bot.user}")
 	embed.add_field(name="ID :", value="1015483556501409792")
-	embed.add_field(name="Name :", value="KATA DDOS")
-	embed.add_field(name="Bot Owner :", value="katavnnn#8946")
-	embed.add_field(name="Function :", value="DDoS Attack")
-	embed.add_field(name="Bot ?", value="True")
-	embed.set_footer(text="© Owner : katavnnn#8946 | Info Bot : 🚀 KATA DDOS 🚀", icon_url=ctx.author.avatar)
+	embed.add_field(name="Nome :", value="Mai")
+	embed.add_field(name="Bot Owner :", value="epysp")
+	embed.add_field(name="função :", value="DDoS Attack")
+	embed.add_field(name="Bot ?", value="Sim")
+	embed.set_footer(text=f"© Owner : epysp | Info Bot : 🚀{bot.user} 🚀", icon_url=ctx.author.avatar)
 	
 	await ctx.send(embed=embed)
 	
@@ -197,10 +199,11 @@ async def Botinfo(ctx):
 @bot.command()
 async def ping(ctx, address: str) -> None:
         """
-        Performs a HTTP request to the specified address
-        :param ctx: commands.Context
-        :param address: Address to make request to
-        :return: HTTP status code
+        Executa uma solicitação HTTP para o endereço especificado
+        :param ctx: comandos.Contexto
+        :param endereço: Endereço para fazer a solicitação
+        :return: código de status HTTP
+
         """
         if not address.startswith("http"):
             address = f"http://{address}"
@@ -212,12 +215,12 @@ async def ping(ctx, address: str) -> None:
             try:
                 async with session.get(address) as res:
                     await ctx.reply(
-                        f"Recieved response code: {res.status} ({res.reason})"
+                        f"Codigo De Resposta: {res.status} ({res.reason})"
                     )
             except asyncio.TimeoutError:
-                await ctx.reply(f"Request timed out after some seconds")
+                await ctx.reply(f"A solicitação expirou após alguns segundos")
             except aiohttp.ClientError:
-                await ctx.reply(f"Could not establish a connection to {address}")
+                await ctx.reply(f"Não foi possível estabelecer uma conexão com {address}")
 
 	
 	
@@ -230,15 +233,15 @@ async def ping(ctx, address: str) -> None:
 @bot.command()
 async def Methods(ctx):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embet = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embet.add_field(name="**Methods Layer4**", value="```Update```")
-		embet.add_field(name="**Methods Layer7**", value="```\nSLOW\nHYPER\nUAM\nUAM-BYPASS\nHTTP-RAW\nHTTP-RAND\nHTTP-SOCKETS\nIO-STRESSER\nCLOUDFLARE\nCF-BYPASS\nKATA-DDOS```")
-		embet.set_footer(text=f"© Owner : katavnnn#8946 | All Methods Show")
+		embet = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embet.add_field(name="**Metodo Camada 1**", value="```Atualizar```")
+		embet.add_field(name="**Metodo Camada888**", value="```\nLENTO\nHYPER\nUAM\nUAM-BYPASS\nHTTP-RAW\nHTTP-RAND\nHTTP-SOCKETS\nIO-STRESSER\nCLOUDFLARE\nCF-BYPASS\nMAI-DDOS```")
+		embet.set_footer(text=f"© Owner: epysp | Todos os métodos são exibidos")
 		
 		await ctx.channel.send(embed=embet)
 	
@@ -251,13 +254,13 @@ async def Methods(ctx):
 @bot.command()
 async def Commands(ctx):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://media2.giphy.com/media/F2U5dFf4LG1zYmnJS2/giphy.gif")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/52/ea/3c/52ea3c4cdbf44a415586725e767f90fb.gif")
 		embed.add_field(name="**SLOW**", value="```!SLOW [url] [time]```")
 		embed.add_field(name="**HYPER**", value="```!HYPER [url] [time]```")
 		embed.add_field(name="**UAM**", value="```!UAM [url] [thread] [time] [raw/proxy]```")
@@ -268,8 +271,8 @@ async def Commands(ctx):
 		embed.add_field(name="**IO-STRESSER**", value="```!IO_STRESSER [url] [time] [thread] [bypass/proxy]```")
 		embed.add_field(name="**CLOUDFLARE**", value="```!CF [url] [time] [thread]```")
 		embed.add_field(name="**CF-BYPASS**", value="```!CF_BYPASS [url] [thread<50] [time]```")
-		embed.add_field(name="**KATA-DDOS**", value="```!KATA [url] [get/post]```")
-		embed.set_footer(text="© Owner : katavnnn#8946 | All Methods Command", icon_url=ctx.author.avatar)
+		embed.add_field(name="**MAI-DDOS**", value="```!MAI [url] [get/post]```")
+		embed.set_footer(text="© Owner : epysp | Todos os metodos", icon_url=ctx.author.avatar)
 		
 		await ctx.send(embed=embed)
 		
@@ -282,20 +285,20 @@ async def Commands(ctx):
 @bot.command()
 async def SLOW(ctx, url, time):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`HTTP-BYPASS`")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
-		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`HTTP-BYPASS`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
+		ma1 = ["https://i.pinimg.com/originals/dd/d8/6c/ddd86cb25f0e9755f9a81257a29b5e96.gif","https://i.pinimg.com/originals/07/25/65/07256543b7243633bd70f1b22237b8ba.gif","https://i.pinimg.com/originals/56/00/5a/56005a1acfe12d3df3e97c646d81b561.gif","https://i.pinimg.com/originals/8b/91/63/8b91639d451bf8cba780ab594e65542f.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -311,20 +314,20 @@ async def SLOW(ctx, url, time):
 @bot.command()
 async def HYPER(ctx, url, time):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`HYPER`")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`HYPER`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -339,21 +342,21 @@ async def HYPER(ctx, url, time):
 @bot.command()
 async def UAM(ctx, url, thread, time, mthd):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`UAM`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`UAM`")
 		embed.add_field(name="**Threads**", value=f"`{thread}`")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -369,21 +372,21 @@ async def UAM(ctx, url, thread, time, mthd):
 @bot.command()
 async def UAM_BYPASS(ctx, url, time, req):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`UAM-BYPASS`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`UAM-BYPASS`")
 		embed.add_field(name="**Requests/ip**", value=f"`{req}")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -395,20 +398,20 @@ async def UAM_BYPASS(ctx, url, time, req):
 @bot.command()
 async def HTTP_RAW(ctx, url, time):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`HTTP-RAW`")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`HTTP-RAW`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		await ctx.send(embed=embed)
 		
@@ -421,20 +424,20 @@ async def HTTP_RAW(ctx, url, time):
 @bot.command()
 async def HTTP_RAND(ctx, url, time):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`HTTP-RAND`")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`HTTP-RAND`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		await ctx.send(embed=embed)
 		
@@ -447,21 +450,21 @@ async def HTTP_RAND(ctx, url, time):
 @bot.command()
 async def HTTP_SOCKETS(ctx, url, req, time):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`HTTP-SOCKETS`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`HTTP-SOCKETS`")
 		embed.add_field(name="**Requests/ip**", value=f"`{req}`")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -474,21 +477,21 @@ async def HTTP_SOCKETS(ctx, url, req, time):
 @bot.command()
 async def IO_STRESSER(ctx, url, time, thread, mthd):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`IO-STRESSER`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`IO-STRESSER`")
 		embed.add_field(name="**Threads**", value=f"`{thread}")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -500,21 +503,21 @@ async def IO_STRESSER(ctx, url, time, thread, mthd):
 @bot.command()
 async def CF(ctx, url, time, thread):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
 		embed.add_field(name="**Methods**", value="`CLOUDFLARE`")
-		embed.add_field(name="**Threads**", value=f"`{thread}")
+		embed.add_field(name="**Metodo**", value=f"`{thread}")
 		embed.add_field(name="**Duration** ", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -525,21 +528,21 @@ async def CF(ctx, url, time, thread):
 @bot.command()
 async def CF_BYPASS(ctx, url, thread, time):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
-		embed.add_field(name="**Methods**", value="`CF-BYPASS`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
+		embed.add_field(name="**Metodo**", value="`CF-BYPASS`")
 		embed.add_field(name="**Threads**", value=f"`{thread}")
-		embed.add_field(name="**Duration**", value=f"`{time}`")
+		embed.add_field(name="**Duração**", value=f"`{time}`")
 		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | Requests By {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | Pedido Por {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
@@ -549,22 +552,22 @@ async def CF_BYPASS(ctx, url, thread, time):
 		
 		
 @bot.command()
-async def KATA(ctx, url, mthd):
+async def MAI(ctx, url, mthd):
 	if ctx.author.id not in buyers:
-		embedc = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=0xfcb103)
-		embedc.add_field(name="**Warning**",value="You Don't Have Permission To Use This Comamnd !")
-		embedc.set_footer(text=f"© Owner : katavnnn#8946 | Warning {ctx.author.name}")
+		embedc = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=0xfcb103)
+		embedc.add_field(name="**Aviso**",value="Você não tem permissão para usar esté comando !")
+		embedc.set_footer(text=f"© Owner : epysp | Aviso {ctx.author.name}")
 		await ctx.reply(embed=embedc)
 	else:
-		embed = discord.Embed(title="🚀 **KATA DDOS** 🚀", color=discord.Colour.random())
-		embed.set_thumbnail(url="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/82380ffc8fe576c18d28f05250f61dc8-1603324282/Preview%20Sample/create-this-cool-neon-animation-discord-avatar.gif")
-		embed.add_field(name="**Target**", value=f"`{url}`")
+		embed = discord.Embed(title="🚀 **MAI DDoS** 🚀", color=discord.Colour.random())
+		embed.set_thumbnail(url="https://i.pinimg.com/originals/a5/7e/bf/a57ebf5a082595205a53213f496a42c1.gif")
+		embed.add_field(name="**Alvo**", value=f"`{url}`")
 		embed.add_field(name="**Methods**", value="`KATA-DDOS`")
 		embed.add_field(name="**Duration**", value=f"`Unknowns`")
-		ma1 = ["https://media4.giphy.com/media/8OTxSsEKzMs2A/giphy.gif","https://media1.giphy.com/media/3o7btQ8jDTPGDpgc6I/giphy.gif","https://media3.giphy.com/media/jOZt5tdGYxzz0H6Nfi/giphy.gif","https://media1.giphy.com/media/EKKAwvGF2sF1C7CXsy/giphy.gif"]
+		ma1 = ["https://i.pinimg.com/564x/0b/40/76/0b4076db26fac1c08a1529d645b851d3.jpg","https://i.pinimg.com/564x/50/31/86/503186969a78e56ee38dcc936ac3fb15.jpg","https://i.pinimg.com/564x/29/31/6d/29316df2eae7c957b9bc8392180c078c.jpg","https://i.pinimg.com/originals/62/e0/fa/62e0fae57dd62e426fc1af974fcc0c76.gif"]
 		rdma1 = random.choice(ma1)
 		embed.set_image(url=rdma1)
-		embed.set_footer(text=f"© Owner : katavnnn#8946 | {ctx.author.name}", icon_url=ctx.author.avatar)
+		embed.set_footer(text=f"© Owner : epysp | {ctx.author.name}", icon_url=ctx.author.avatar)
 		
 		
 		await ctx.send(embed=embed)
